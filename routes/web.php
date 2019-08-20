@@ -11,14 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::view('contact', 'contact');
 
 Route::view('about', 'about');
 
-Route::get('customers', function (){
-   return view('customres');
-});
+Route::view('home', 'home');
+
+Route::get('customers', 'CustomersController@list');
