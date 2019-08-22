@@ -8,31 +8,63 @@ use Illuminate\Http\Request;
 
 class CustomersController extends Controller
 {
-   public function list(){
+   public function index(){
 
-       $activeCustomers = Customer::active()->get();
-       $inactiveCustomers = Customer::inactive()->get();
+       $customers = Customer::all();
 
+       return view('customers.index', compact('customers'));
+   }
+
+   public function create(){
+
+       $customer = new Customer();
        $companies = Company::all();
-
-       $customers=Customer::all();
-
-       return view('internals.customers', compact('activeCustomers', 'inactiveCustomers', 'companies'));
+       return view('customers.create', compact('companies', 'customer'));
    }
 
    public function store(){
 
-       $data = request()->validate([
-           'name' => 'required|min:3',
-           'email' => 'required|email',
-           'active' => 'required',
-           'company_id' =>'required',
-       ]);
-
-       Customer::create($data);
 
 
-       return back();
+       Customer::create($this->validateRequest());
+
+
+       return redirect('customers');
 
    }
+
+   public function show (Customer $customer){
+
+       return view ('customers.show', compact('customer'));
+   }
+
+    public function edit(Customer $customer){
+        $companies = Company::all();
+        return view('customers.edit', compact('customer','companies'));
+
+    }
+
+
+    public function update(Customer $customer){
+
+
+
+        $customer->update($this->validateRequest());
+
+        return redirect ('/customers/'.$customer->id);
+        }
+
+        public function destroy(Customer $customer){
+            $customer->delete();
+            return redirect('customers');
+        }
+
+        private function validateRequest(){
+            return request()->validate([
+                'name' => 'required|min:3',
+                'email' => 'required|email',
+                'active' => 'required',
+                'company_id' =>'required',
+            ]);
+        }
 }
