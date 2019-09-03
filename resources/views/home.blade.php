@@ -15,6 +15,7 @@
                     @endif
 
                     You are logged in!
+                    <my-button text="MyNewText" type="submit"></my-button>
                 </div>
             </div>
         </div>

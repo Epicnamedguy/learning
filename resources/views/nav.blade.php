@@ -14,16 +14,16 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">Home</a>
+                    <a class="nav-link active" href="{{route('home')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
+                    <a class="nav-link" href="{{route('about')}}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
+                    <a class="nav-link" href="{{route('contact.create')}}">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/customers">Customers list</a>
+                    <a class="nav-link" href="{{route('customers.index')}}">Customers list</a>
                 </li>
 
             </ul>
